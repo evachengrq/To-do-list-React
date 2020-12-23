@@ -7,6 +7,7 @@ function TodoItems() {
   return(
     <section className="todo-items">
       <TodoItem/>
+      <TodoItem/>
     </section>
   )
 }

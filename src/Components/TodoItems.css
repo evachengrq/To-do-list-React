@@ -1,3 +1,5 @@
 .todo-items {
-  text-align: -webkit-center;
+  width: 550px;
+  margin: 0 auto;
+  border: 1px solid lightgray;
 }

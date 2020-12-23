@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  width: 550px;
+  background-color: white;
+  height: 50px;
+  align-items: center;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  font-size: 14px;
+  color: #777;
+  font-weight: 200;
+}
+
+.item-left {
+  margin-left: 10px;
+}
+
+.status {
+  display: flex;
+  list-style: none;
+  margin-left: 90px;
+}
+
+.status li {
+  margin-right: 10px;
+}
+

@@ -11,7 +11,7 @@ function TodoItem() {
         </div>
       </div>
       <p className="item-text">item 1</p>
-      <button className="close-button">×</button>
+      <button className="delete-button">×</button>
     </section>
   )
 }

@@ -23,5 +23,11 @@
 
 .status li {
   margin-right: 10px;
+  padding: 3px 7px;
+}
+
+.status li:hover {
+  border: 1px solid #cc9a9a;
+  cursor: pointer;
 }
 

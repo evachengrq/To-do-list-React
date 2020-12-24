@@ -3,11 +3,12 @@ import TodoItem from './TodoItem'
 import React from 'react'
 
 
-function TodoItems() {
+function TodoItems(props) {
+  const todoItems = props.todoItems
+
   return(
     <section className="todo-items">
-      <TodoItem/>
-      <TodoItem/>
+      {todoItems.map(element => <TodoItem key={element.id} todoItem={element} status={element}/>)}
     </section>
   )
 }

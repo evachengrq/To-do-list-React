@@ -1,16 +1,18 @@
 import './TodoItem.css'
 import React from 'react'
 
-function TodoItem() {
+function TodoItem({todoItem}) {
+
+  const {isCompleted, value} = todoItem
   return (
-    <section className="todo-item">
+    <section className={isCompleted ? "todo-item-completed" : "todo-item"}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id="checkbox" />
           <label htmlFor="checkbox"></label>
         </div>
       </div>
-      <p className="item-text">item 1</p>
+      <p className="item-text">{value}</p>
       <button className="delete-button">×</button>
     </section>
   )

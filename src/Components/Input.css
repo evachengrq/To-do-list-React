@@ -1,15 +1,44 @@
-.input {
-  padding: 16px 16px 16px 60px;
+.input-section {
+  margin: 0 auto;
+  padding: 16px 0;
   background-color: white;
+  width: 550px;
+  height: 33px;
+  border: 1px solid lightgray;
+  border-bottom: none;
+  text-align: right;
+}
+
+.select-all-button {
+  background-color: transparent;
+  border: none;
+  transform: rotate(90deg);
+  color: #e6e6e6;
+  font-size: 22px;
+  margin-right: 20px;
+}
+
+.input {
   width: 474px;
-  line-height: 1.4em;
+  height: 33px;
+  margin-right: 16px;
   font-weight: 300;
   font-family: inherit;
   font-size: 24px;
-  border: 1px solid lightgray;
+  border: none;
 }
 
 .input::-webkit-input-placeholder {
   font-style: italic;
   color: #e6e6e6;
 }
+
+.input:focus {
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
+

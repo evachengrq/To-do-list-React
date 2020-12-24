@@ -97,5 +97,8 @@
   font-size: 35px;
   font-weight: 100;
   color: #cc9a9a;
+}
+
+.hidden {
   display: none;
 }

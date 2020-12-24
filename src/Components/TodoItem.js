@@ -1,9 +1,9 @@
 import './TodoItem.css'
 import React, { useState } from 'react'
 
-function TodoItem({todoItem}) {
+function TodoItem(props) {
 
-  let {isCompleted, value, id} = todoItem
+  let {isCompleted, value, id} = props.todoItem
   const [todoValue, updateValue] = useState(value)
   const [completeStatus, updateStatus] = useState(isCompleted)
 
@@ -30,8 +30,23 @@ function TodoItem({todoItem}) {
     updateStatus(completeStatus ? false : true)
   }
 
+  const handleMouseEnter = () => {
+    const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
+    deleteButton.classList.remove('hidden')
+  }
+
+  const handleMouseLeave = () => {
+    const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
+    deleteButton.classList.add('hidden')
+  }
+
+  const handleClickDeleteButton = (event) => {
+    const targetItem = event.target.parentNode.remove()
+  }
+
+
   return (
-    <section className={completeStatus ? "todo-item-completed" : "todo-item"}>
+    <section className={completeStatus ? "todo-item-completed" : "todo-item"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id="checkbox"/>
@@ -39,7 +54,7 @@ function TodoItem({todoItem}) {
         </div>
       </div>
       <label type="text" className="item-text" onDoubleClick={handleDoubleClick}>{todoValue}</label>
-      <button className="delete-button">×</button>
+      <button className="delete-button hidden" onClick={handleClickDeleteButton}>×</button>
     </section>
   )
 }

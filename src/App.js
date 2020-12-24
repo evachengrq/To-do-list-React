@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={getInput} itemLength={todoItems.length} />
+      <Input handleSubmit={getInput} itemLength={todoItems.length} todoItems={todoItems}/>
       <TodoItems todoItems={todoItems} handleEdit={updateItem}/>
       <Footer/>
     </div>

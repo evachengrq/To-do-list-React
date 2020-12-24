@@ -11,9 +11,13 @@ function Input(props) {
     }
   }
 
+  const selectAll = () => {
+
+  }
+
   return(
     <section className="input-section">
-      <button className={props.itemLength > 0 ? "select-all-button" : "select-all-button hidden"} >❯</button>
+      <button className={props.itemLength > 0 ? "select-all-button" : "select-all-button hidden"} onClick={selectAll}>❯</button>
       <input type="text" placeholder="What needs to be done?" className="input" onKeyDown={handleKeyDown}></input>
     </section>
   )

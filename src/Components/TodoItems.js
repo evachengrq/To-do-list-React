@@ -8,7 +8,7 @@ function TodoItems(props) {
 
   return(
     <section className="todo-items">
-      {todoItems.map(element => <TodoItem key={element.id} todoItem={element} status={element}/>)}
+      {todoItems.map((element, index) => <TodoItem key={element.id} todoItem={element} status={element} index={index}/>)}
     </section>
   )
 }

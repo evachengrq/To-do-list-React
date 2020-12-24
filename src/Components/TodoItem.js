@@ -1,18 +1,39 @@
 import './TodoItem.css'
-import React from 'react'
+import React, { useState } from 'react'
 
 function TodoItem({todoItem}) {
 
-  const {isCompleted, value} = todoItem
+  let {isCompleted, value, id} = todoItem
+  const [todoValue, updateValue] = useState(value)
+
+  const handleEdit = (event) => {
+    if (event.key === 'Enter') {
+      const updatedValue = event.target.value 
+      updateValue(updatedValue)
+    }
+  }
+  
+  const handleDoubleClick = (event) => {
+    const oldItemText = event.target.innerText
+    event.target.innerText = ''
+    
+    const editInput = document.createElement('input')
+    editInput.type = "text"
+    editInput.classList.add('edit-input')
+    editInput.value = oldItemText
+    editInput.addEventListener('keypress', handleEdit)
+    event.target.appendChild(editInput)
+  }
+
   return (
     <section className={isCompleted ? "todo-item-completed" : "todo-item"}>
       <div className="container">
         <div className="round">
-          <input type="checkbox" id="checkbox" />
+          <input type="checkbox" id="checkbox"/>
           <label htmlFor="checkbox"></label>
         </div>
       </div>
-      <p className="item-text">{value}</p>
+      <label type="text" className="item-text" onDoubleClick={handleDoubleClick}>{todoValue}</label>
       <button className="delete-button">×</button>
     </section>
   )

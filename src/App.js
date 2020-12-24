@@ -18,11 +18,15 @@ function App() {
     })
   }
 
+  const updateItem = (todoItem) => {
+    
+  }
+
   return (
     <div className="App">
       <Header/>
       <Input handleSubmit={getInput} itemLength={todoItems.length} />
-      <TodoItems todoItems={todoItems}/>
+      <TodoItems todoItems={todoItems} handleEdit={updateItem}/>
       <Footer/>
     </div>
   );

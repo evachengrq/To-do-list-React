@@ -3,7 +3,6 @@
   background-color: white;
   width: 550px;
   height: 65px;
-  box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
   font-weight: 200;
   font-family: inherit;
   border-bottom: none;
@@ -62,6 +61,21 @@
   width: 430px;
   text-align: left;
   align-self: center;
+}
+
+.edit-input {
+  height: 60px;
+  width: 476px;
+  border: 1px solid gray;
+  box-shadow: 0 0 10px lightgray;
+  padding-left: 10px;
+  font-size: 24px;
+  font-weight: 300;
+  font-family: inherit;
+}
+
+.edit-input:focus {
+  outline: none;
 }
 
 .delete-button {

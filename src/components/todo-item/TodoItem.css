@@ -99,6 +99,10 @@
   color: #cc9a9a;
 }
 
+.delete-button:focus {
+  outline: none;
+}
+
 .hidden {
   display: none;
 }

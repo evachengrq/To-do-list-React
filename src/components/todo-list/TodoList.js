@@ -1,9 +1,9 @@
-import './TodoItems.css'
-import TodoItem from './TodoItem'
+import './TodoList.css'
+import TodoItem from '../todo-item/TodoItem'
 import React from 'react'
 
 
-function TodoItems(props) {
+function TodoList(props) {
   const todoItems = props.todoItems
 
   return(
@@ -13,4 +13,4 @@ function TodoItems(props) {
   )
 }
 
-export default TodoItems
+export default TodoList

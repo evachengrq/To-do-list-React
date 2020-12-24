@@ -32,12 +32,16 @@ function TodoItem(props) {
 
   const handleMouseEnter = () => {
     const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
-    deleteButton.classList.remove('hidden')
+    if(deleteButton !== null || undefined) {
+      deleteButton.classList.remove('hidden')
+    }
   }
 
   const handleMouseLeave = () => {
     const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
-    deleteButton.classList.add('hidden')
+    if(deleteButton !== null || undefined) {
+      deleteButton.classList.add('hidden')
+    }
   }
 
   const handleClickDeleteButton = (event) => {

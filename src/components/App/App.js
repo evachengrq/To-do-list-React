@@ -1,8 +1,8 @@
 import './App.css';
-import Header from './Components/Header'
-import Input from './Components/Input'
-import Footer from './Components/Footer'
-import TodoItems from './Components/TodoItems'
+import Header from '../header/Header'
+import Input from '../input/Input'
+import Footer from '../footer/Footer'
+import TodoList from '../todo-list/TodoList'
 import React, { useState } from 'react'
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <Header/>
       <Input handleSubmit={getInput} itemLength={todoItems.length} todoItems={todoItems}/>
-      <TodoItems todoItems={todoItems} handleEdit={updateItem}/>
+      <TodoList todoItems={todoItems} handleEdit={updateItem}/>
       <Footer/>
     </div>
   );

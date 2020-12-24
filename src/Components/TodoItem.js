@@ -5,6 +5,7 @@ function TodoItem({todoItem}) {
 
   let {isCompleted, value, id} = todoItem
   const [todoValue, updateValue] = useState(value)
+  const [completeStatus, updateStatus] = useState(isCompleted)
 
   const handleEdit = (event) => {
     if (event.key === 'Enter') {
@@ -25,12 +26,16 @@ function TodoItem({todoItem}) {
     event.target.appendChild(editInput)
   }
 
+  const handleClick = () => {
+    updateStatus(completeStatus ? false : true)
+  }
+
   return (
-    <section className={isCompleted ? "todo-item-completed" : "todo-item"}>
+    <section className={completeStatus ? "todo-item-completed" : "todo-item"}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id="checkbox"/>
-          <label htmlFor="checkbox"></label>
+          <label htmlFor="checkbox" onClick={handleClick}></label>
         </div>
       </div>
       <label type="text" className="item-text" onDoubleClick={handleDoubleClick}>{todoValue}</label>

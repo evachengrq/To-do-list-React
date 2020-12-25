@@ -4,61 +4,58 @@ import React, { useState } from 'react'
 function TodoItem(props) {
 
   let {isCompleted, value, id} = props.todoItem
+
   const [todoValue, updateValue] = useState(value)
   const [completeStatus, updateStatus] = useState(isCompleted)
+  const [isEditing, updateEditStatus] = useState(false)
+  const [showDeleteButton, updateDeleteButtonPresence] = useState(false)
 
-  const handleEdit = (event) => {
+  const updateItem = (event) => {
+    props.handleEdit(id, event.target.value)
+  }
+
+  const submitEdit = (event) => {
     if (event.key === 'Enter') {
       const updatedValue = event.target.value 
       updateValue(updatedValue)
+      updateEditStatus(false)
     }
   }
   
-  const handleDoubleClick = (event) => {
-    const oldItemText = event.target.innerText
-    event.target.innerText = ''
-    
-    const editInput = document.createElement('input')
-    editInput.type = "text"
-    editInput.classList.add('edit-input')
-    editInput.value = oldItemText
-    editInput.addEventListener('keypress', handleEdit)
-    event.target.appendChild(editInput)
+  const showEditInput = () => {
+    updateEditStatus(true)
+    updateDeleteButtonPresence(false)
   }
 
   const handleClick = () => {
     updateStatus(completeStatus ? false : true)
   }
 
-  const handleMouseEnter = () => {
-    const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
-    if(deleteButton !== null || undefined) {
-      deleteButton.classList.remove('hidden')
-    }
+  const displayDeleteButton = () => {
+    updateDeleteButtonPresence(true)
   }
 
-  const handleMouseLeave = () => {
-    const deleteButton = document.querySelectorAll('.delete-button').item(props.index)
-    if(deleteButton !== null || undefined) {
-      deleteButton.classList.add('hidden')
-    }
+  const removeDeleteButton = () => {
+    updateDeleteButtonPresence(false)
   }
 
-  const handleClickDeleteButton = (event) => {
-    const targetItem = event.target.parentNode.remove()
+  const deleteItem = () => {
+    props.handleDelete(id)
   }
 
 
   return (
-    <section className={completeStatus ? "todo-item-completed" : "todo-item"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <section className={completeStatus ? "todo-item-completed" : "todo-item"} onMouseEnter={displayDeleteButton} onMouseLeave={removeDeleteButton}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id="checkbox"/>
           <label htmlFor="checkbox" onClick={handleClick}></label>
         </div>
       </div>
-      <label type="text" className="item-text" onDoubleClick={handleDoubleClick}>{todoValue}</label>
-      <button className="delete-button hidden" onClick={handleClickDeleteButton}>×</button>
+      {isEditing 
+      ? <input type="text" className="edit-input" value={value} onChange={updateItem} onKeyDown={submitEdit} onMouseEnter={removeDeleteButton}/> 
+      : <label type="text" className="item-text" onDoubleClick={showEditInput}>{todoValue}</label>}
+      <button className={showDeleteButton ? "delete-button" : "hidden"} onClick={deleteItem}>×</button>
     </section>
   )
 }

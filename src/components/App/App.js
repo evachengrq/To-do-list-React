@@ -7,26 +7,33 @@ import React, { useState } from 'react'
 
 function App() {
   const [todoItems, setTodoItems] = useState([])
-  const getInput = (input) => {
+
+  const addItem = (id, input) => {
     setTodoItems((state)=> {
       const newItem = {
         value: input,
         isCompleted: false,
-        id: Math.floor(Math.random() * 10000) 
+        id: id 
       }
-      return [...state, newItem]
+      return [newItem, ...state]
     })
   }
 
-  const updateItem = (todoItem) => {
-    
+  const updateItem = (id, input) => {
+    deleteItem(id)
+    addItem(id, input)
+  }
+
+  const deleteItem = (id) => {
+    const deletedItems = todoItems.filter(todo => todo.id !== id)
+    setTodoItems(deletedItems)
   }
 
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={getInput} itemLength={todoItems.length} todoItems={todoItems}/>
-      <TodoList todoItems={todoItems} handleEdit={updateItem}/>
+      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems}/>
+      <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem}/>
       <Footer/>
     </div>
   );

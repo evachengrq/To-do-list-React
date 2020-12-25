@@ -3,11 +3,13 @@ import React from 'react'
 
 
 function Input(props) {
+
   const handleKeyDown = (event) => {
+    const id = Math.floor(Math.random() * 10000)
     if(event.key === 'Enter') {
       const input = event.target.value
       event.target.value = ''
-      return props.handleSubmit(input)
+      return props.handleSubmit(id, input)
     }
   }
 

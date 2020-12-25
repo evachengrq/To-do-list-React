@@ -29,11 +29,16 @@ function App() {
     setTodoItems(deletedItems)
   }
 
+  const setItemCompleted = (id) => {
+    const updatedItemList = todoItems.find(item => item.id ===id).isCompleted = true
+    setTodoItems(updatedItemList)
+  }
+
   return (
     <div className="App">
       <Header/>
       <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems}/>
-      <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem}/>
+      <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted}/>
       <Footer/>
     </div>
   );

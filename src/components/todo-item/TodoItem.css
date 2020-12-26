@@ -8,6 +8,10 @@
   border-bottom: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .completed{
   text-decoration: line-through;
   color:  #e6e6e6;
@@ -95,8 +99,4 @@
 
 .delete-button:focus {
   outline: none;
-}
-
-.hidden {
-  display: none;
 }

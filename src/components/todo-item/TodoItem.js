@@ -8,6 +8,7 @@ function TodoItem(props) {
 
   const [isEditing, updateEditStatus] = useState(false)
   const [showDeleteButton, updateDeleteButtonPresence] = useState(false)
+  
 
   const updateItem = (event) => {
     props.handleEdit(id, event.target.value)
@@ -15,7 +16,6 @@ function TodoItem(props) {
 
   const submitEdit = (event) => {
     if (event.key === 'Enter') {
-      const updatedValue = event.target.value 
       updateEditStatus(false)
     }
   }
@@ -44,7 +44,6 @@ function TodoItem(props) {
   const deleteItem = () => {
     props.handleDelete(id)
   }
-
 
   return (
     <section className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>

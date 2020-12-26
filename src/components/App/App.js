@@ -50,7 +50,6 @@ function App() {
   }
 
   const handleSelectAll = () => {
-    // 判断是不是所有item都是completed，不是的话将所有items的isCompleted变成true，是的话将所有items的isCompleted变成false
     const activeItems = todoItems.filter(item => item.isCompleted === false)
     if (activeItems.length > 0) {
       setTodoItems(setAllItemsCompletion(true))
@@ -59,12 +58,12 @@ function App() {
     }
   }
 
-  const setAllItemsCompletion = (status) => {
+  const setAllItemsCompletion = (completionStatus) => {
     const items = []
     for (let i = 0; i < todoItems.length; i++) {
       const item = {
         value: todoItems[i].value,
-        isCompleted: status,
+        isCompleted: completionStatus,
         id: todoItems[i].id
       }
       items.push(item)

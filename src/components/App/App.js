@@ -3,11 +3,12 @@ import Header from '../header/Header'
 import Input from '../input/Input'
 import Footer from '../footer/Footer'
 import TodoList from '../todo-list/TodoList'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todoItems, setTodoItems] = useState([])
+  const [completionStatus, setCompletionStatus] = useState('All')
 
   const addItem = (input) => {
     const newItem = {
@@ -71,12 +72,28 @@ function App() {
     return items
   }
 
+  const showItemsByStatus = (status) => {
+    setCompletionStatus(status)
+  }
+
+  const filteredItems = () => {
+    let filteredItems
+    if (completionStatus === "active") {
+      filteredItems = todoItems.filter(item => !item.isCompleted)
+    } else if (completionStatus === "completed") {
+      filteredItems = todoItems.filter(item => item.isCompleted)
+    } else {
+      filteredItems = todoItems
+    }
+    return filteredItems;
+  }
+
   return (
     <div className="App">
       <Header/>
       <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems} handleSelectAll={handleSelectAll}/>
-      <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted}/>
-      <Footer/>
+      <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
+      <Footer showItemsByStatus={showItemsByStatus}/>
     </div>
   );
 }

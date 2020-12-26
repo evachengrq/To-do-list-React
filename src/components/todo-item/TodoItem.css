@@ -8,16 +8,9 @@
   border-bottom: none;
 }
 
-.todo-item-completed {
-  display: flex;
-  background-color: white;
-  width: 550px;
-  height: 65px;
-  font-weight: 200;
-  font-family: inherit;
-  color: #e6e6e6;
+.completed{
   text-decoration: line-through;
-  border-bottom: none;
+  color:  #e6e6e6;
 }
 
 .container {

@@ -4,6 +4,7 @@ import Input from '../input/Input'
 import Footer from '../footer/Footer'
 import TodoList from '../todo-list/TodoList'
 import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todoItems, setTodoItems] = useState([])
@@ -13,7 +14,7 @@ function App() {
       const newItem = {
         value: input,
         isCompleted: false,
-        id: id 
+        id: uuidv4() 
       }
       return [newItem, ...state]
     })

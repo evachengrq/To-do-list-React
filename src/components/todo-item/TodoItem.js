@@ -1,5 +1,6 @@
 import './TodoItem.css'
 import React, { useState } from 'react'
+import classNames from 'classnames'
 
 function TodoItem(props) {
 
@@ -50,7 +51,7 @@ function TodoItem(props) {
 
 
   return (
-    <section className={isCompleted ? "todo-item-completed" : "todo-item"} onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
+    <section className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id="checkbox" onClick={handleClick}/>
@@ -59,10 +60,9 @@ function TodoItem(props) {
       </div>
       {isEditing 
       ? <input type="text" className="edit-input" value={value} onChange={updateItem} onKeyDown={submitEdit} onMouseEnter={removeDeleteButton} onBlur={leaveEditing}/> 
-      : <label type="text" className="item-text" onDoubleClick={showEditInput}>{todoValue}</label>}
-      <button className={showDeleteButton ? "delete-button" : "hidden"} onClick={deleteItem}>×</button>
+      : <p className={classNames(['item-text', {'completed': isCompleted}])} onDoubleClick={showEditInput}>{todoValue}</p>}
+      <button className={classNames({'delete-button': showDeleteButton, "hidden": !showDeleteButton})} onClick={deleteItem}>×</button>
     </section>
   )
 }
-
 export default TodoItem

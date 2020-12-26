@@ -1,6 +1,8 @@
 .footer {
   display: flex;
-  width: 550px;
+  justify-content: space-between;
+  padding: 0 10px;
+  width: 530px;
   background-color: white;
   height: 50px;
   align-items: center;
@@ -11,14 +13,9 @@
   font-weight: 200;
 }
 
-.item-left {
-  margin-left: 10px;
-}
-
 .status {
   display: flex;
   list-style: none;
-  margin-left: 90px;
 }
 
 .status li {
@@ -32,3 +29,11 @@
   cursor: pointer;
 }
 
+.clear-completed:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

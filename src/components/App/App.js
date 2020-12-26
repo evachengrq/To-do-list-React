@@ -88,12 +88,17 @@ function App() {
     return filteredItems;
   }
 
+  const deleteAllCompleted = () => {
+      const filteredItems = todoItems.filter(item => !item.isCompleted)
+      setTodoItems(filteredItems)
+  }
+
   return (
     <div className="App">
       <Header/>
       <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems} handleSelectAll={handleSelectAll}/>
       <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
-      <Footer showItemsByStatus={showItemsByStatus}/>
+      <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={todoItems}/>
     </div>
   );
 }

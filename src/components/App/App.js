@@ -25,13 +25,21 @@ function App() {
   }
 
   const deleteItem = (id) => {
-    const deletedItems = todoItems.filter(todo => todo.id !== id)
-    setTodoItems(deletedItems)
+    const restItems = todoItems.filter(todo => todo.id !== id)
+    setTodoItems(restItems)
   }
 
   const setItemCompleted = (id) => {
-    const updatedItemList = todoItems.find(item => item.id ===id).isCompleted = true
-    setTodoItems(updatedItemList)
+    const completedItem = todoItems.find(item => item.id === id)
+    const otherItems = todoItems.filter(item => item.id !== id)
+    setTodoItems(()=> {
+      const updatedItem = {
+        value: completedItem.value,
+        isCompleted: true,
+        id: id 
+      }
+      return [...otherItems, updatedItem]
+    })
   }
 
   return (

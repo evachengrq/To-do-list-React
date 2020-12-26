@@ -53,8 +53,8 @@ function TodoItem(props) {
     <section className={isCompleted ? "todo-item-completed" : "todo-item"} onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
       <div className="container">
         <div className="round">
-          <input type="checkbox" id="checkbox"/>
-          <label htmlFor="checkbox" onClick={handleClick}></label>
+          <input type="checkbox" id="checkbox" onClick={handleClick}/>
+          <label htmlFor="checkbox"></label>
         </div>
       </div>
       {isEditing 

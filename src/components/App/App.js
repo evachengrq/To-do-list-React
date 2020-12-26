@@ -49,10 +49,33 @@ function App() {
     setTodoItems([...otherItems, updatedItem])
   }
 
+  const handleSelectAll = () => {
+    // 判断是不是所有item都是completed，不是的话将所有items的isCompleted变成true，是的话将所有items的isCompleted变成false
+    const activeItems = todoItems.filter(item => item.isCompleted === false)
+    if (activeItems.length > 0) {
+      setTodoItems(setAllItemsCompletion(true))
+    } else {
+      setTodoItems(setAllItemsCompletion(false))
+    }
+  }
+
+  const setAllItemsCompletion = (status) => {
+    const items = []
+    for (let i = 0; i < todoItems.length; i++) {
+      const item = {
+        value: todoItems[i].value,
+        isCompleted: status,
+        id: todoItems[i].id
+      }
+      items.push(item)
+    }
+    return items
+  }
+
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems}/>
+      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems} handleSelectAll={handleSelectAll}/>
       <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted}/>
       <Footer/>
     </div>

@@ -4,9 +4,8 @@ import classNames from 'classnames'
 
 function TodoItem(props) {
 
-  let {isCompleted, value, id} = props.todoItem
+  const {isCompleted, value, id} = props.todoItem;
 
-  const [todoValue, updateValue] = useState(value)
   const [isEditing, updateEditStatus] = useState(false)
   const [showDeleteButton, updateDeleteButtonPresence] = useState(false)
 
@@ -17,7 +16,6 @@ function TodoItem(props) {
   const submitEdit = (event) => {
     if (event.key === 'Enter') {
       const updatedValue = event.target.value 
-      updateValue(updatedValue)
       updateEditStatus(false)
     }
   }
@@ -27,9 +25,7 @@ function TodoItem(props) {
     updateDeleteButtonPresence(false)
   }
 
-  const leaveEditing = (event) => {
-    const updatedValue = event.target.value 
-    updateValue(updatedValue)
+  const leaveEditing = () => {
     updateEditStatus(false)
   }
 
@@ -54,13 +50,13 @@ function TodoItem(props) {
     <section className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
       <div className="container">
         <div className="round">
-          <input type="checkbox" id="checkbox" onClick={handleClick}/>
-          <label htmlFor="checkbox"></label>
+          <input type="checkbox" id={id} onClick={handleClick}/>
+          <label htmlFor={id}></label>
         </div>
       </div>
       {isEditing 
       ? <input type="text" className="edit-input" value={value} onChange={updateItem} onKeyDown={submitEdit} onMouseEnter={removeDeleteButton} onBlur={leaveEditing}/> 
-      : <p className={classNames(['item-text', {'completed': isCompleted}])} onDoubleClick={showEditInput}>{todoValue}</p>}
+      : <p className={classNames(['item-text', {'completed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
       <button className={classNames({'delete-button': showDeleteButton, "hidden": !showDeleteButton})} onClick={deleteItem}>×</button>
     </section>
   )

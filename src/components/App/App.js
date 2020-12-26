@@ -9,21 +9,28 @@ import { v4 as uuidv4 } from 'uuid';
 function App() {
   const [todoItems, setTodoItems] = useState([])
 
-  const addItem = (id, input) => {
-    setTodoItems((state)=> {
-      const newItem = {
-        value: input,
-        isCompleted: false,
-        id: uuidv4() 
-      }
-      return [newItem, ...state]
-    })
+  const addItem = (input) => {
+    const newItem = {
+      value: input,
+      isCompleted: false,
+      id: uuidv4() 
+    }
+    setTodoItems([newItem, ...todoItems])
   }
 
   const updateItem = (id, input) => {
-    deleteItem(id)
-    addItem(id, input)
+    const itemToBeEdited = todoItems.find(item => item.id === id)
+    const index = todoItems.findIndex(item => item.id ===id)
+    const editedItem = {
+      value: input,
+      isCompleted: itemToBeEdited.isCompleted,
+      id: itemToBeEdited.id
+    }
+    const itemsBeforeEditedItem = todoItems.slice(0, index)
+    const itemsAfterEditedItem = todoItems.slice(index + 1)
+    setTodoItems([...itemsBeforeEditedItem, editedItem, ...itemsAfterEditedItem])
   }
+
 
   const deleteItem = (id) => {
     const restItems = todoItems.filter(todo => todo.id !== id)
@@ -33,14 +40,13 @@ function App() {
   const setItemCompleted = (id) => {
     const completedItem = todoItems.find(item => item.id === id)
     const otherItems = todoItems.filter(item => item.id !== id)
-    setTodoItems(()=> {
-      const updatedItem = {
-        value: completedItem.value,
-        isCompleted: true,
-        id: id 
-      }
-      return [...otherItems, updatedItem]
-    })
+    const completionStatus = completedItem.isCompleted ? false : true;
+    const updatedItem = {
+      value: completedItem.value,
+      isCompleted: completionStatus,
+      id: completedItem.id 
+    }
+    setTodoItems([...otherItems, updatedItem])
   }
 
   return (

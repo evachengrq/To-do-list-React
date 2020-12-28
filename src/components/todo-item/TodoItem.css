@@ -96,8 +96,13 @@
   font-size: 35px;
   font-weight: 100;
   color: #cc9a9a;
+  display: none;
 }
 
 .delete-button:focus {
   outline: none;
+}
+
+.todo-item:hover .delete-button {
+  display: block;
 }

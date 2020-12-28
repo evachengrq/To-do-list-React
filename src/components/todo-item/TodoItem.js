@@ -35,12 +35,12 @@ function TodoItem(props) {
   }
 
   return (
-    <li className="li">
-      <input type="checkbox" className="li__checkbox" id={id} onClick={handleClick}/>
+    <li className="todo-item">
+      <input type="checkbox" className="todo-item__checkbox" id={id} onClick={handleClick}/>
       {isEditing 
-      ? <input type="text" className="li__input" value={value} onChange={updateItem} onKeyDown={submitEdit} onBlur={leaveEditing}/> 
-      : <p className={classNames(['li__text', {'li__text--crossed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
-      <button className={isEditing ? "hidden" : "li__button"} onClick={deleteItem}>×</button>
+      ? <input type="text" className="todo-item__input" value={value} onChange={updateItem} onKeyDown={submitEdit} onBlur={leaveEditing}/> 
+      : <p className={classNames(['todo-item__text', {'todo-item__text--crossed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
+      <button className={isEditing ? "hidden" : "todo-item__button"} onClick={deleteItem}>×</button>
     </li>
   )
 }

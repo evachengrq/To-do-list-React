@@ -1,4 +1,4 @@
-.li {
+.todo-item {
   display: flex;
   background-color: white;
   width: 550px;
@@ -12,16 +12,16 @@
   display: none;
 }
 
-.li__text--crossed{
+.todo-item__text--crossed{
   text-decoration: line-through;
   color:  #e6e6e6;
 }
 
-.li__checkbox {
+.todo-item__checkbox {
   visibility: hidden;
 }
 
-.li__checkbox[type="checkbox"]::before {
+.todo-item__checkbox[type="checkbox"]::before {
   visibility: visible;
   margin: 15px 0 0 10px;
   content: "";
@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 
-.li__checkbox[type="checkbox"]:checked::before {
+.todo-item__checkbox[type="checkbox"]:checked::before {
   visibility: visible;
   content: "\2713";
   width: 30px;
@@ -47,15 +47,15 @@
   color: #66bb6a;
 }
 
-.li__text {
-  margin-left: 30px;
+.todo-item__text {
+  margin-left: 40px;
   width: 430px;
   text-align: left;
   align-self: center;
   word-break: break-all;
 }
 
-.li__input {
+.todo-item__input {
   height: 60px;
   width: 476px;
   border: 1px solid gray;
@@ -65,11 +65,11 @@
   font-size: 24px;
 }
 
-.li__input:focus {
+.todo-item__input:focus {
   outline: none;
 }
 
-.li__button {
+.todo-item__button {
   align-self: center;
   border: none;
   background-color: white;
@@ -78,10 +78,10 @@
   display: none;
 }
 
-.li__button:focus {
+.todo-item__button:focus {
   outline: none;
 }
 
-.li:hover .li__button {
+.todo-item:hover .todo-item__button {
   display: block;
 }

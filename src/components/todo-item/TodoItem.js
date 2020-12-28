@@ -46,7 +46,7 @@ function TodoItem(props) {
   }
 
   return (
-    <section className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
+    <li className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
       <div className="container">
         <div className="round">
           <input type="checkbox" id={id} onClick={handleClick}/>
@@ -57,7 +57,7 @@ function TodoItem(props) {
       ? <input type="text" className="edit-input" value={value} onChange={updateItem} onKeyDown={submitEdit} onMouseEnter={removeDeleteButton} onBlur={leaveEditing}/> 
       : <p className={classNames(['item-text', {'completed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
       <button className={classNames({'delete-button': showDeleteButton, "hidden": !showDeleteButton})} onClick={deleteItem}>×</button>
-    </section>
+    </li>
   )
 }
 export default TodoItem

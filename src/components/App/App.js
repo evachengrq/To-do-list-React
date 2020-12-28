@@ -43,17 +43,16 @@ function App() {
   const setItemCompleted = (id) => {
     const completedItem = todoItems.find(item => item.id === id)
     const otherItems = todoItems.filter(item => item.id !== id)
-    const completionStatus = completedItem.isCompleted ? false : true;
     const updatedItem = {
       value: completedItem.value,
-      isCompleted: completionStatus,
+      isCompleted: !completedItem.isCompleted,
       id: completedItem.id 
     }
     setTodoItems([...otherItems, updatedItem])
   }
 
   const handleSelectAll = () => {
-    const activeItems = todoItems.filter(item => item.isCompleted === false)
+    const activeItems = todoItems.filter(item => !item.isCompleted)
     if (activeItems.length > 0) {
       setTodoItems(setAllItemsCompletion(true))
     } else {

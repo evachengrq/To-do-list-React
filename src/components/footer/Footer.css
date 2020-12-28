@@ -12,20 +12,20 @@
   font-weight: 200;
 }
 
-.footer__filter {
+.filter {
   display: flex;
   list-style: none;
   width: 190px;
   margin-left: 75px;
 }
 
-.footer__filter__tab {
+.filter__tab {
   margin-right: 10px;
   border: 1px solid transparent;
   padding: 3px 7px;
 }
 
-.footer__filter__tab:hover {
+.filter__tab:hover {
   border: 1px solid #cc9a9a;
   cursor: pointer;
 }

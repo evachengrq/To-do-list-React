@@ -14,7 +14,7 @@ function Footer(props) {
     <section className="footer">
       <p>{lengthOfActives} items left</p>
       <ul className="status">
-        <li onClick={() => {props.showItemsByStatus("all")}}>All</li>
+        <li onClick={() => props.showItemsByStatus("all")}>All</li>
         <li onClick={() => props.showItemsByStatus("active")}>Active</li>
         <li onClick={() => props.showItemsByStatus("completed")}>Completed</li>
       </ul>

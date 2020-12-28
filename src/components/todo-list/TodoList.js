@@ -8,7 +8,9 @@ function TodoList(props) {
 
   return(
     <section className="todo-items">
-      {todoItems.map(element => <TodoItem key={element.id} todoItem={element} handleEdit={props.handleEdit} handleDelete={props.handleDelete} handleComplete={props.handleComplete} filteredItems={props.filteredItems} />)}
+      {todoItems.map(
+        element => <TodoItem key={element.id} todoItem={element} handleEdit={props.handleEdit} handleDelete={props.handleDelete} handleComplete={props.handleComplete} />
+      )}
     </section>
   )
 }

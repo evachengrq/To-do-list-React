@@ -96,7 +96,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems} handleSelectAll={handleSelectAll}/>
+      <Input handleSubmit={addItem} itemLength={todoItems.length} handleSelectAll={handleSelectAll}/>
       <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
       <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={todoItems}/>
     </div>

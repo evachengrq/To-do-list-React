@@ -1,6 +1,5 @@
 .footer {
   display: flex;
-  justify-content: space-between;
   padding: 0 10px;
   width: 530px;
   background-color: white;
@@ -16,6 +15,8 @@
 .footer__filter {
   display: flex;
   list-style: none;
+  width: 190px;
+  margin-left: 75px;
 }
 
 .footer__filter__tab {
@@ -29,9 +30,20 @@
   cursor: pointer;
 }
 
+.footer__clear {
+  margin-left: 50px;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: #777;
+  font-weight: 200;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 .footer__clear:hover {
   text-decoration: underline;
   cursor: pointer;
+  
 }
 
 .hidden {

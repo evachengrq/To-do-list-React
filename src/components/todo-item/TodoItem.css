@@ -70,6 +70,7 @@
   width: 430px;
   text-align: left;
   align-self: center;
+  word-break: break-all;
 }
 
 .li__input {

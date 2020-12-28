@@ -3,17 +3,21 @@ import Header from '../header/Header'
 import Input from '../input/Input'
 import Footer from '../footer/Footer'
 import TodoList from '../todo-list/TodoList'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')))
 
+
   const addItem = (input) => {
-    const newItem = {
-      value: input,
-      isCompleted: false,
-      id: uuidv4() 
+    if (input.length !== 0) {
+      const newItem = {
+        value: input,
+        isCompleted: false,
+        id: uuidv4() 
+      }
+      setTodoItems([newItem, ...todoItems])
     }
     setTodoItems([newItem, ...todoItems])
     localStorage.setItem('todos', JSON.stringify(todoItems))
@@ -43,22 +47,65 @@ function App() {
   const setItemCompleted = (id) => {
     const completedItem = todoItems.find(item => item.id === id)
     const otherItems = todoItems.filter(item => item.id !== id)
-    const completionStatus = completedItem.isCompleted ? false : true;
     const updatedItem = {
       value: completedItem.value,
-      isCompleted: completionStatus,
+      isCompleted: !completedItem.isCompleted,
       id: completedItem.id 
     }
     setTodoItems([...otherItems, updatedItem])
     localStorage.setItem('todos', JSON.stringify(todoItems))
   }
 
+
+    const activeItems = todoItems.filter(item => !item.isCompleted)
+
+    if (activeItems.length > 0) {
+      setTodoItems(setAllItemsCompletion(true))
+    } else {
+      setTodoItems(setAllItemsCompletion(false))
+    }
+  }
+
+  const setAllItemsCompletion = (completionStatus) => {
+    const items = []
+    for (let i = 0; i < todoItems.length; i++) {
+      const item = {
+        value: todoItems[i].value,
+        isCompleted: completionStatus,
+        id: todoItems[i].id
+      }
+      items.push(item)
+    }
+    return items
+  }
+
+  const showItemsByStatus = (status) => {
+    setCompletionStatus(status)
+  }
+
+  const filteredItems = () => {
+    let filteredItems
+    if (completionStatus === "active") {
+      filteredItems = todoItems.filter(item => !item.isCompleted)
+    } else if (completionStatus === "completed") {
+      filteredItems = todoItems.filter(item => item.isCompleted)
+    } else {
+      filteredItems = todoItems
+    }
+    return filteredItems;
+  }
+
+  const deleteAllCompleted = () => {
+      const filteredItems = todoItems.filter(item => !item.isCompleted)
+      setTodoItems(filteredItems)
+  }
+
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems}/>
-      <TodoList todoItems={todoItems} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted}/>
-      <Footer/>
+      <Input handleSubmit={addItem} itemLength={todoItems.length} handleSelectAll={handleSelectAll}/>
+      <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
+      <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={todoItems}/>
     </div>
   );
 }

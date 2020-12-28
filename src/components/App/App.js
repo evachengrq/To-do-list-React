@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const [todoItems, setTodoItems] = useState([])
-  const [completionStatus, setCompletionStatus] = useState('All')
+  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')))
+
 
   const addItem = (input) => {
     if (input.length !== 0) {
@@ -19,6 +19,8 @@ function App() {
       }
       setTodoItems([newItem, ...todoItems])
     }
+    setTodoItems([newItem, ...todoItems])
+    localStorage.setItem('todos', JSON.stringify(todoItems))
   }
 
   const updateItem = (id, input) => {
@@ -32,12 +34,14 @@ function App() {
     const itemsBeforeEditedItem = todoItems.slice(0, index)
     const itemsAfterEditedItem = todoItems.slice(index + 1)
     setTodoItems([...itemsBeforeEditedItem, editedItem, ...itemsAfterEditedItem])
+    localStorage.setItem('todos', JSON.stringify(todoItems))
   }
 
 
   const deleteItem = (id) => {
     const restItems = todoItems.filter(todo => todo.id !== id)
     setTodoItems(restItems)
+    localStorage.setItem('todos', JSON.stringify(todoItems))
   }
 
   const setItemCompleted = (id) => {
@@ -49,6 +53,7 @@ function App() {
       id: completedItem.id 
     }
     setTodoItems([...otherItems, updatedItem])
+    localStorage.setItem('todos', JSON.stringify(todoItems))
   }
 
 

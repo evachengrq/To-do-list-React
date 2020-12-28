@@ -1,4 +1,4 @@
-.todo-item {
+.li {
   display: flex;
   background-color: white;
   width: 550px;
@@ -12,7 +12,7 @@
   display: none;
 }
 
-.completed{
+.li__text--crossed{
   text-decoration: line-through;
   color:  #e6e6e6;
 }
@@ -65,14 +65,14 @@
   opacity: 1;
 }
 
-.item-text {
+.li__text {
   margin-left: 30px;
   width: 430px;
   text-align: left;
   align-self: center;
 }
 
-.edit-input {
+.li__input {
   height: 60px;
   width: 476px;
   border: 1px solid gray;
@@ -82,11 +82,11 @@
   font-size: 24px;
 }
 
-.edit-input:focus {
+.li__input:focus {
   outline: none;
 }
 
-.delete-button {
+.li__button {
   align-self: center;
   border: none;
   background-color: white;
@@ -95,10 +95,10 @@
   display: none;
 }
 
-.delete-button:focus {
+.li__button:focus {
   outline: none;
 }
 
-.todo-item:hover .delete-button {
+.li:hover .li__button {
   display: block;
 }

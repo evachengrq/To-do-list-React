@@ -13,23 +13,23 @@
   font-weight: 200;
 }
 
-.status {
+.footer__filter {
   display: flex;
   list-style: none;
 }
 
-.status li {
+.footer__filter__tab {
   margin-right: 10px;
   border: 1px solid transparent;
   padding: 3px 7px;
 }
 
-.status li:hover {
+.footer__filter__tab:hover {
   border: 1px solid #cc9a9a;
   cursor: pointer;
 }
 
-.clear-completed:hover {
+.footer__clear:hover {
   text-decoration: underline;
   cursor: pointer;
 }

@@ -13,12 +13,12 @@ function Footer(props) {
   return(
     <section className="footer">
       <p>{lengthOfActives} items left</p>
-      <ul className="status">
-        <li onClick={() => props.showItemsByStatus("all")}>All</li>
-        <li onClick={() => props.showItemsByStatus("active")}>Active</li>
-        <li onClick={() => props.showItemsByStatus("completed")}>Completed</li>
+      <ul className="footer__filter">
+        <li className="footer__filter__tab" onClick={() => props.showItemsByStatus("all")}>All</li>
+        <li className="footer__filter__tab" onClick={() => props.showItemsByStatus("active")}>Active</li>
+        <li className="footer__filter__tab" onClick={() => props.showItemsByStatus("completed")}>Completed</li>
       </ul>
-      <p onClick={handleClickClear} className={lengthOfCompleteds > 0 ? "clear-completed" : "hidden"}>Clear completed</p>
+      <button onClick={handleClickClear} className={lengthOfCompleteds > 0 ? "footer__clear" : "hidden"}>Clear completed</button>
     </section>
   )
 }

@@ -11,12 +11,14 @@ function App() {
   const [completionStatus, setCompletionStatus] = useState('All')
 
   const addItem = (input) => {
-    const newItem = {
-      value: input,
-      isCompleted: false,
-      id: uuidv4() 
+    if (input.length !== 0) {
+      const newItem = {
+        value: input,
+        isCompleted: false,
+        id: uuidv4() 
+      }
+      setTodoItems([newItem, ...todoItems])
     }
-    setTodoItems([newItem, ...todoItems])
   }
 
   const updateItem = (id, input) => {

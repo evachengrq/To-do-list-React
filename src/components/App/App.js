@@ -7,8 +7,12 @@ import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const [todoItems, setTodoItems] = useState([])
+  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')))
   const [completionStatus, setCompletionStatus] = useState('All')
+
+  useEffect(() => {
+    localStorage.setItem('todos',JSON.stringify(todoItems))
+  }, [todoItems])
 
   const addItem = (input) => {
     if (input.length !== 0) {

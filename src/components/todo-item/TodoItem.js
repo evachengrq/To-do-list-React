@@ -7,6 +7,8 @@ function TodoItem(props) {
   const {isCompleted, value, id} = props.todoItem;
 
   const [isEditing, updateEditStatus] = useState(false)
+  const [showDeleteButton, updateDeleteButtonPresence] = useState(false)
+  
 
   const updateItem = (event) => {
     props.handleEdit(id, event.target.value)
@@ -20,6 +22,7 @@ function TodoItem(props) {
   
   const showEditInput = () => {
     updateEditStatus(true)
+    updateDeleteButtonPresence(false)
   }
 
   const leaveEditing = () => {
@@ -30,18 +33,31 @@ function TodoItem(props) {
     props.handleComplete(id)
   }
 
+  const displayDeleteButton = () => {
+    updateDeleteButtonPresence(true)
+  }
+
+  const removeDeleteButton = () => {
+    updateDeleteButtonPresence(false)
+  }
+
   const deleteItem = () => {
     props.handleDelete(id)
   }
 
   return (
-    <li className="todo-item">
-      <input type="checkbox" className="todo-item__checkbox" id={id} onClick={handleClick}/>
+    <section className="todo-item" onMouseOver={displayDeleteButton} onMouseLeave={removeDeleteButton}>
+      <div className="container">
+        <div className="round">
+          <input type="checkbox" id={id} onClick={handleClick}/>
+          <label htmlFor={id}></label>
+        </div>
+      </div>
       {isEditing 
-      ? <input type="text" className="todo-item__input" value={value} onChange={updateItem} onKeyDown={submitEdit} onBlur={leaveEditing}/> 
-      : <p className={classNames(['todo-item__text', {'todo-item__text--crossed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
-      <button className={isEditing ? "hidden" : "todo-item__button"} onClick={deleteItem}>×</button>
-    </li>
+      ? <input type="text" className="edit-input" value={value} onChange={updateItem} onKeyDown={submitEdit} onMouseEnter={removeDeleteButton} onBlur={leaveEditing}/> 
+      : <p className={classNames(['item-text', {'completed': isCompleted}])} onDoubleClick={showEditInput}>{value}</p>}
+      <button className={classNames({'delete-button': showDeleteButton, "hidden": !showDeleteButton})} onClick={deleteItem}>×</button>
+    </section>
   )
 }
 export default TodoItem

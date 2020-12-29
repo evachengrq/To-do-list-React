@@ -1,5 +1,6 @@
 .footer {
   display: flex;
+  justify-content: space-between;
   padding: 0 10px;
   width: 530px;
   background-color: white;
@@ -12,36 +13,23 @@
   font-weight: 200;
 }
 
-.filter {
+.status {
   display: flex;
   list-style: none;
-  width: 190px;
-  margin-left: 75px;
-
 }
 
-.filter__tab {
+.status li {
   margin-right: 10px;
   border: 1px solid transparent;
   padding: 3px 7px;
 }
 
-.filter__tab:hover {
+.status li:hover {
   border: 1px solid #cc9a9a;
   cursor: pointer;
 }
 
-.footer__clear {
-  margin-left: 50px;
-  border: none;
-  background-color: transparent;
-  font-size: 14px;
-  color: #777;
-  font-weight: 200;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.footer__clear:hover {
+.clear-completed:hover {
   text-decoration: underline;
   cursor: pointer;
 }

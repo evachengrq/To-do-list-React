@@ -11,14 +11,12 @@ function App() {
   const [completionStatus, setCompletionStatus] = useState('All')
 
   const addItem = (input) => {
-    if (input.length !== 0) {
-      const newItem = {
-        value: input,
-        isCompleted: false,
-        id: uuidv4() 
-      }
-      setTodoItems([newItem, ...todoItems])
+    const newItem = {
+      value: input,
+      isCompleted: false,
+      id: uuidv4() 
     }
+    setTodoItems([newItem, ...todoItems])
   }
 
   const updateItem = (id, input) => {
@@ -43,17 +41,17 @@ function App() {
   const setItemCompleted = (id) => {
     const completedItem = todoItems.find(item => item.id === id)
     const otherItems = todoItems.filter(item => item.id !== id)
+    const completionStatus = completedItem.isCompleted ? false : true;
     const updatedItem = {
       value: completedItem.value,
-      isCompleted: !completedItem.isCompleted,
+      isCompleted: completionStatus,
       id: completedItem.id 
     }
     setTodoItems([...otherItems, updatedItem])
   }
 
-
-    const activeItems = todoItems.filter(item => !item.isCompleted)
-
+  const handleSelectAll = () => {
+    const activeItems = todoItems.filter(item => item.isCompleted === false)
     if (activeItems.length > 0) {
       setTodoItems(setAllItemsCompletion(true))
     } else {
@@ -98,7 +96,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Input handleSubmit={addItem} itemLength={todoItems.length} handleSelectAll={handleSelectAll}/>
+      <Input handleSubmit={addItem} itemLength={todoItems.length} todoItems={todoItems} handleSelectAll={handleSelectAll}/>
       <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
       <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={todoItems}/>
     </div>

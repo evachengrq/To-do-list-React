@@ -17,7 +17,7 @@ function App() {
   const addItem = (input) => {
     if (input.length !== 0) {
       const newItem = {
-        value: input,
+        value: input.trim(),
         isCompleted: false,
         id: uuidv4() 
       }

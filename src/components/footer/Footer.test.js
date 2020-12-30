@@ -75,5 +75,11 @@ describe('renders footers', () => {
       const footer = render(<Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={[{id: '1', isCompleted: true, value: 'item 1'}]}/>)
       expect(footer.getByText('Clear completed')).not.toBeNull
     })
+
+    test('call deleteAllCompleted method when click clear completed button', () => {
+      const footer = render(<Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={[{id: '1', isCompleted: true, value: 'item 1'}]}/>)
+      footer.getByText('Clear completed').click()
+      expect(deleteAllCompleted).toBeCalledTimes(1)
+    })
   })
 })

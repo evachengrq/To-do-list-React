@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')))
+  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')) || [])
   const [completionStatus, setCompletionStatus] = useState('All')
 
   useEffect(() => {

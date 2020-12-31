@@ -3,7 +3,7 @@ import React from 'react'
 
 function Header() {
   return (
-    <header className='header'>todos</header>
+    <header data-testid='headerComponent' className='header'>todos</header>
   )
 }
 

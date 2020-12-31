@@ -13,7 +13,7 @@ function Input(props) {
   }
 
   return(
-    <section className="textfield">
+    <section data-testid="inputComponent" className="textfield">
       <button className={props.itemLength > 0 ? "textfield__button" : "hidden"} onClick={props.handleSelectAll}>❯</button>
       <input type="text" placeholder="What needs to be done?" className="textfield__input" onKeyDown={handleKeyDown}></input>
     </section>

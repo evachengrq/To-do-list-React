@@ -7,7 +7,7 @@ function TodoList(props) {
   const todoItems = props.todoItems
 
   return(
-    <ul className="todo-items">
+    <ul data-testid='todoListComponent' className="todo-items">
       {todoItems.map(
         element => <TodoItem key={element.id} todoItem={element} handleEdit={props.handleEdit} handleDelete={props.handleDelete} handleComplete={props.handleComplete} />
       )}

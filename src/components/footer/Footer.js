@@ -11,7 +11,7 @@ function Footer(props) {
   const lengthOfCompleteds = props.todoItems.length - lengthOfActives
 
   return(
-    <section className="footer">
+    <section data-testid='footerComponent' className="footer">
       <p>{lengthOfActives > 1 ? lengthOfActives + " items left": lengthOfActives + " item left"} </p>
       <ul className="filter">
         <li className="filter__tab" onClick={() => props.showItemsByStatus("all")}>All</li>

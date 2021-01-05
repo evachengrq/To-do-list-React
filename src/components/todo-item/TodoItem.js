@@ -1,6 +1,8 @@
 import './TodoItem.css'
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import { connect } from 'react-redux';
+import store from '../../store';
 
 function TodoItem(props) {
 
@@ -9,7 +11,12 @@ function TodoItem(props) {
   const [isEditing, updateEditStatus] = useState(false)
 
   const updateItem = (event) => {
-    props.handleEdit(id, event.target.value)
+    const editedItem = {
+      value: event.target.value,
+      isCompleted: isCompleted,
+      id: id
+    }
+    props.handleEdit(editedItem)
   }
 
   const submitEdit = (event) => {
@@ -27,7 +34,12 @@ function TodoItem(props) {
   }
 
   const handleClick = () => {
-    props.handleComplete(id)
+    const completedItem = {
+      id: id,
+      value: value,
+      isCompleted: !isCompleted
+    }
+    props.handleComplete(completedItem)
   }
 
   const deleteItem = () => {
@@ -44,4 +56,5 @@ function TodoItem(props) {
     </li>
   )
 }
+
 export default TodoItem

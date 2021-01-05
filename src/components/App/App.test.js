@@ -1,11 +1,15 @@
 import React from "react";
-import { act, cleanup, fireEvent, render } from '@testing-library/react';
+import { Provider } from "react-redux";
+import store from "../../store";
+import { render } from '../../test-utils/test.util';
+import { act, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 
 describe('renders App', () => {
   
   let app
   beforeEach(() => {
+    localStorage.clear()
     app = render(<App />)
   })
   
@@ -33,6 +37,7 @@ describe('when type in the type box', () => {
   let app
   let input 
   beforeEach(() => {
+    localStorage.clear()
     app = render(<App />)
     input = app.getByRole('textbox')
     fireEvent.change(input, {target: {value: '    item 3'}})
@@ -44,9 +49,7 @@ describe('when type in the type box', () => {
 
   describe('when enter key is down', () => {
     beforeEach(() => {
-      act(() => {
-        fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'})
-      })
+      fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'})
     })
     test('item should be added', () => {
       expect(input.value).toBe('')
@@ -63,37 +66,44 @@ describe('when type in the type box', () => {
       test('should show no item', () => {
         expect(app.queryByText('item 3')).toBeNull()
       })
+    })
 
-      describe('when click on active filter', () => {
-        let activeFilter
-        beforeEach(() => {
-          activeFilter = app.getByText('Active')
-          activeFilter.click()
-        })
-        test('should show 1 item', () => {
-          // 还是beforeEach的问题，有3个item
-          expect(app.getAllByText('item 3')).not.toBeNull()
-        })
+    describe('when click on active filter', () => {
+      let activeFilter
+      beforeEach(() => {
+        activeFilter = app.getByText('Active')
+        activeFilter.click()
+      })
+      test('should show 1 item', () => {
+        // 还是beforeEach的问题，有3个item
+        expect(app.getByText('item 3')).not.toBeNull()
+      })
 
-        describe('when click the delete button', () => {
-          test('item should be deleted', () => {
-            // beforeEach
-            const items = app.getAllByText('item 3')
-            fireEvent.mouseOver(items[0])
-            const deleteButton = app.getAllByText('×')[0]
-            fireEvent.click(deleteButton)
-            const newItems = app.getAllByText('item 3')
-            expect(items.length - newItems.length).toBe(1)
-          })
-
-          describe('when click the complete all button', () => {
-            test('should show no item with active filter', () => {
-              const completeAll = app.getByText('❯')
-              fireEvent.click(completeAll)
-              expect(app.queryByText('item 3')).toBeNull
-            })
-          })
+      describe('when click the complete button', () => {
+        test('should show no item with active filter', () => {
+          const completeButton = app.getByRole('checkbox')
+          app.debug()
+          fireEvent.click(completeButton)
+          expect(app.queryByText('item 3')).toBeNull
         })
+      })
+    })
+
+    describe('when click the complete all button', () => {
+      test('should show no item with active filter', () => {
+        const completeAll = app.getByText('❯')
+        fireEvent.click(completeAll)
+        expect(app.queryByText('item 3')).toBeNull
+      })
+    })
+
+    describe('when click the delete button', () => {
+      test('item should be deleted', () => {
+        const item = app.getByText('item 3')
+        fireEvent.mouseOver(item)
+        const deleteButton = app.getByText('×')
+        fireEvent.click(deleteButton)
+        expect(app.queryByText('item 3')).toBeNull
       })
     })
   })

@@ -3,78 +3,62 @@ import Header from '../header/Header'
 import Input from '../input/Input'
 import Footer from '../footer/Footer'
 import TodoList from '../todo-list/TodoList'
-import React, { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from 'react'
+import { connect, useDispatch, useSelector } from "react-redux"
 
 function App() {
-  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todos')) || [])
+  const todoItems = useSelector(state => state)
   const [completionStatus, setCompletionStatus] = useState('All')
 
-  useEffect(() => {
-    localStorage.setItem('todos',JSON.stringify(todoItems))
-  }, [todoItems])
+  const dispatch = useDispatch()
 
   const addItem = (input) => {
-    if (input.length !== 0) {
-      const newItem = {
-        value: input.trim(),
-        isCompleted: false,
-        id: uuidv4() 
-      }
-      setTodoItems([newItem, ...todoItems])
-    }
+    dispatch({ 
+      type: 'add_item',
+      payload: input
+    })
   }
 
-  const updateItem = (id, input) => {
-    const itemToBeEdited = todoItems.find(item => item.id === id)
-    const index = todoItems.findIndex(item => item.id ===id)
-    const editedItem = {
-      value: input,
-      isCompleted: itemToBeEdited.isCompleted,
-      id: itemToBeEdited.id
-    }
-    const itemsBeforeEditedItem = todoItems.slice(0, index)
-    const itemsAfterEditedItem = todoItems.slice(index + 1)
-    setTodoItems([...itemsBeforeEditedItem, editedItem, ...itemsAfterEditedItem])
+  const updateItem = (editedItem) => {
+    dispatch({
+      type: 'update_item',
+      payload: editedItem
+    })
   }
-
 
   const deleteItem = (id) => {
-    const restItems = todoItems.filter(todo => todo.id !== id)
-    setTodoItems(restItems)
+    dispatch({
+      type: 'delete_item',
+      payload: id
+    })
   }
 
-  const setItemCompleted = (id) => {
-    const completedItem = todoItems.find(item => item.id === id)
-    const otherItems = todoItems.filter(item => item.id !== id)
-    const updatedItem = {
-      value: completedItem.value,
-      isCompleted: !completedItem.isCompleted,
-      id: completedItem.id 
-    }
-    setTodoItems([...otherItems, updatedItem])
+  const setItemCompleted = (completedItem) => {
+    dispatch({
+      type: 'update_item',
+      payload: completedItem
+    })
   }
 
   const handleSelectAll = () => {
     const activeItems = todoItems.filter(item => !item.isCompleted)
     if (activeItems.length > 0) {
-      setTodoItems(setAllItemsCompletion(true))
+      dispatch({
+        type: 'set_all',
+        payload: true
+      })
     } else {
-      setTodoItems(setAllItemsCompletion(false))
+      dispatch({
+        type: 'set_all',
+        payload: false
+      })
     }
   }
 
-  const setAllItemsCompletion = (completionStatus) => {
-    const items = []
-    for (let i = 0; i < todoItems.length; i++) {
-      const item = {
-        value: todoItems[i].value,
-        isCompleted: completionStatus,
-        id: todoItems[i].id
-      }
-      items.push(item)
-    }
-    return items
+  const deleteAllCompleted = () => {
+    dispatch({
+      type: 'clear_completed',
+    })
   }
 
   const showItemsByStatus = (status) => {
@@ -93,19 +77,17 @@ function App() {
     return filteredItems;
   }
 
-  const deleteAllCompleted = () => {
-      const filteredItems = todoItems.filter(item => !item.isCompleted)
-      setTodoItems(filteredItems)
-  }
+  
 
   return (
     <div className="App">
       <Header/>
       <Input handleSubmit={addItem} itemLength={todoItems.length} handleSelectAll={handleSelectAll}/>
-      <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted} />
-      <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={todoItems}/>
+      <TodoList todoItems={filteredItems()} handleEdit={updateItem} handleDelete={deleteItem} handleComplete={setItemCompleted}/>
+      <Footer showItemsByStatus={showItemsByStatus} completionStatus={completionStatus} deleteAllCompleted={deleteAllCompleted} todoItems={filteredItems()}/>
     </div>
   );
 }
 
-export default App;
+
+export default App

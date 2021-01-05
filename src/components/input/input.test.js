@@ -1,7 +1,7 @@
 import React from 'react'
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '../../test-utils/test.util';
+import { fireEvent } from "@testing-library/react";
 import Input from "./Input";
-
 
 const handleSubmit = jest.fn()
 const handleSelectAll = jest.fn()
@@ -26,9 +26,9 @@ describe('renders input field', () => {
     expect(handleSubmit).toBeCalledTimes(0)
   })
 
-  test('calls the handleSubmit function when enter key is down', () => {
+  test('calls no handleSubmit function when input length is 0', () => {
     fireEvent.keyDown(textfield, {key: 'Enter', code: 'Enter'})
-    expect(handleSubmit).toBeCalledTimes(1)
+    expect(handleSubmit).toBeCalledTimes(0)
   })
 
   test('calls no handleSubmit function when other key is down', () => {

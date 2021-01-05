@@ -23,7 +23,7 @@ describe('renders todoItems', () => {
       const todoItem = render(<TodoItem key={'1'} todoItem={{value: 'item 1', isCompleted: false, id: '1'}} handleEdit={handleEdit} handleDelete={handleDelete} handleComplete={handleComplete} />)
       todoItem.getByRole('checkbox').click()
       expect(handleComplete).toBeCalledTimes(1)
-      expect(handleComplete).toBeCalledWith('1')
+      expect(handleComplete).toBeCalledWith({value: 'item 1', isCompleted: true, id: '1'})
     })
   })
 
@@ -56,7 +56,7 @@ describe('renders todoItems', () => {
       const todoInput = todoItem.getByRole('textbox')
       fireEvent.change(todoInput, {target: {value: 'item 2'}})
       expect(handleEdit).toBeCalledTimes(1)
-      expect(handleEdit).toBeCalledWith('1', 'item 2')
+      expect(handleEdit).toBeCalledWith({value: 'item 2', isCompleted: false, id: '1'})
     })
 
     test('shows todoText when enter key is down', () => {

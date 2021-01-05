@@ -1,14 +1,15 @@
 import './Input.css'
 import React from 'react'
-
+import { useDispatch } from 'react-redux'
 
 function Input(props) {
-
   const handleKeyDown = (event) => {
     if(event.key === 'Enter') {
       const input = event.target.value
+      if(input.trim().length > 0) {
+        props.handleSubmit(input)
+      }
       event.target.value = ''
-      return props.handleSubmit(input)
     }
   }
 

@@ -1,10 +1,13 @@
 import './TodoList.css'
 import TodoItem from '../todo-item/TodoItem'
+import { connect } from "react-redux";
 import React from 'react'
 
 
 function TodoList(props) {
   const todoItems = props.todoItems
+  localStorage.setItem('todos', JSON.stringify(todoItems))
+  
 
   return(
     <ul data-testid='todoListComponent' className="todo-items">

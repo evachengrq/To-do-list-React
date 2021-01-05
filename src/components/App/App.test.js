@@ -57,6 +57,17 @@ describe('when type in the type box', () => {
       expect(app.getByText('1 item left')).not.toBeNull()
     })
 
+    describe('when item is edited', () => {
+      test('should show new item', () => {
+        const item = app.getByText('item 3')
+        fireEvent.doubleClick(item)
+        const input = app.getByTestId('editTextField')
+        fireEvent.change(input, {target: {value : 'item 1'}})
+        fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'})
+        expect(app.getByText('item 1')).not.toBeNull()
+      })
+    })
+
     describe('when click on completed filter', () => {
       let completedFilter
       beforeEach(() => {
@@ -68,6 +79,37 @@ describe('when type in the type box', () => {
       })
     })
 
+    describe('when click on all filter', () => {
+      let allFilter
+      beforeEach(() => {
+        allFilter = app.getByText('All')
+        allFilter.click()
+      })
+      test('should show one item', () => {
+        expect(app.queryByText('item 3')).not.toBeNull()
+      })
+
+      describe('when click the complete all button', () => {
+        let completeAll
+        beforeEach(() => {
+          completeAll = app.getByText('❯')
+          fireEvent.click(completeAll)
+        })
+        test('should show one item with all filter', () => {
+          
+          expect(app.queryByText('item 3')).not.toBeNull()
+        })
+
+        describe('when click the clear completed button', () => {
+          test('should show no item with all filter', () => {
+            const clearCompleted = app.queryByText('Clear completed')
+            fireEvent.click(clearCompleted)
+            expect(app.queryByText('item 3')).toBeNull()
+          })
+        })
+      })
+    })
+
     describe('when click on active filter', () => {
       let activeFilter
       beforeEach(() => {
@@ -75,27 +117,29 @@ describe('when type in the type box', () => {
         activeFilter.click()
       })
       test('should show 1 item', () => {
-        // 还是beforeEach的问题，有3个item
         expect(app.getByText('item 3')).not.toBeNull()
       })
 
       describe('when click the complete button', () => {
-        test('should show no item with active filter', () => {
-          const completeButton = app.getByRole('checkbox')
-          app.debug()
+        let completeButton
+        beforeEach(() => {
+          completeButton = app.getByRole('checkbox')
           fireEvent.click(completeButton)
-          expect(app.queryByText('item 3')).toBeNull
+        })
+        test('should show no item with active filter', () => {
+          expect(app.queryByText('item 3')).toBeNull()
+        })
+
+        describe('when click the complete all button', () => {
+          test('should show one item with active filter', () => {
+            const completeAll = app.getByText('❯')
+            fireEvent.click(completeAll)
+            expect(app.getByText('item 3')).not.toBeNull()
+          })
         })
       })
     })
-
-    describe('when click the complete all button', () => {
-      test('should show no item with active filter', () => {
-        const completeAll = app.getByText('❯')
-        fireEvent.click(completeAll)
-        expect(app.queryByText('item 3')).toBeNull
-      })
-    })
+    
 
     describe('when click the delete button', () => {
       test('item should be deleted', () => {
@@ -103,7 +147,7 @@ describe('when type in the type box', () => {
         fireEvent.mouseOver(item)
         const deleteButton = app.getByText('×')
         fireEvent.click(deleteButton)
-        expect(app.queryByText('item 3')).toBeNull
+        expect(app.queryByText('item 3')).toBeNull()
       })
     })
   })
